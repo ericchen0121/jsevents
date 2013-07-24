@@ -2,23 +2,33 @@ $(document).ready(function() {
   var todoTemplate = $.trim($('#todo_template').html());
 
   function bindEvents() {
-    // Bind functions which add, remove, and complete todos to the appropriate
-    // elements
+    // Bind functions which add, remove, and complete todos
+
+    // Add Todo
+    $(".toolbox").delegate(".add", "click", function(){
+      addTodo(todoText());
+    });
+
+    // Delete Todo
+    $('.todo').delegate('a.delete', 'click', function(){
+      
+    });
+
   }
 
-  //Create functions to add, remove and complete todos
+  function todoText() {
+    return $('.toolbox .todo').val()
+  }
 
-  
+  function addTodo(text) {
+    $('.todo_list').append(buildTodo(text))
+  }
 
   function buildTodo(todoName) {
-    // Creates an jQueryDOMElement from the todoTemplate.
     var $todo = $(todoTemplate);
-    // Modifies it's text to use the passed in todoName.
     $todo.find('h2').text(todoName);
-    // Returns the jQueryDOMElement to be used elsewhere.
     return $todo;
   }
   
-
   bindEvents();
 });
